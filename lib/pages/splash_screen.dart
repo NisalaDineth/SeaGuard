@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../utils/app_colors.dart';
 import '../widgets/tab_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -46,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen>
     // Start animations
     _startAnimations();
 
-    // Navigate to TabScreen after 3 seconds
+    // Navigate to TabScreen
     _navigateToHome();
   }
 
@@ -80,7 +81,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color(0xFF2E7D8E), // Ocean blue background
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -95,8 +95,8 @@ class _SplashScreenState extends State<SplashScreen>
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xFF2E7D8E).withValues(alpha: 0.7),
-                const Color(0xFF1A5F6B).withValues(alpha: 0.8),
+                AppColors.primary.withValues(alpha: 0.7),
+                AppColors.primaryDark.withValues(alpha: 0.8),
                 const Color(0xFF0D3A42).withValues(alpha: 0.9),
               ],
             ),

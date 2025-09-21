@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../utils/app_colors.dart';
 import 'auth_screen.dart';
 
 class AuthSplashScreen extends StatefulWidget {
@@ -83,8 +84,8 @@ class _AuthSplashScreenState extends State<AuthSplashScreen>
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              const Color(0xFF2E7D8E),
-              const Color(0xFF1E5A6B),
+              AppColors.primary,
+              AppColors.primaryDark,
               if (isDarkMode)
                 const Color(0xFF0A0A0A)
               else
