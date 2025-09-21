@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'pages/tab_screen.dart';
+import 'pages/auth_splash_screen.dart';
 
 void main() {
   runApp(const SeaGuardApp());
@@ -25,7 +25,9 @@ class SeaGuardApp extends StatelessWidget {
         ),
         cardColor: Colors.white,
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF2E7D8E)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF2E7D8E),
+          ),
         ),
       ),
       darkTheme: ThemeData(
@@ -38,10 +40,12 @@ class SeaGuardApp extends StatelessWidget {
         ),
         cardColor: const Color(0xFF1A1A1A),
         elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF2E7D8E)),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF2E7D8E),
+          ),
         ),
       ),
-      home: const TabScreen(),
+      home: const AuthSplashScreen(),
     );
   }
 }
