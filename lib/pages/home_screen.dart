@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: 200,
+
             flexibleSpace: FlexibleSpaceBar(
               title: Text("SeaGuard", style: TextStyle(color: Colors.white)),
               background: Container(

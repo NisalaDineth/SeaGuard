@@ -44,7 +44,7 @@ class KpiCard extends StatelessWidget {
                 color: primaryColor.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, size: 20, color: primaryColor),
+              child: Icon(icon, size: 10, color: primaryColor),
             ),
             const SizedBox(height: 12),
             Text(title,
@@ -52,7 +52,7 @@ class KpiCard extends StatelessWidget {
                   color: Colors.grey[600],
                   fontWeight: FontWeight.w500,
                 )),
-            const SizedBox(height: 4),
+            const SizedBox(height: 5),
             Text(value,
                 style: theme.textTheme.titleLarge?.copyWith(
                   color: primaryColor,

@@ -31,7 +31,7 @@ class LearnScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Learn"), backgroundColor: const Color(0xFF2E7D8E)),
+      appBar: AppBar(title: const Text("Learn"), backgroundColor: const Color(0xFF2E7D8E), centerTitle: true),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: lessons.length,

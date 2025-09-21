@@ -31,6 +31,7 @@ class ActionsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Action Hub"),
+        backgroundColor: const Color(0xFF2E7D8E),
         centerTitle: true,
       ),
       body: ListView.builder(
