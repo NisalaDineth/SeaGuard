@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/app_colors.dart';
 
 class ActionCard extends StatelessWidget {
   final String title;
@@ -41,19 +42,35 @@ class ActionCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
+                    Text(
+                      title,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text("$points Points", style: theme.textTheme.bodyMedium?.copyWith(color: Colors.grey[600])),
+                    Text(
+                      "$points Points",
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: AppColors.textHint,
+                      ),
+                    ),
                   ],
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primary,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Text("Start", style: TextStyle(color: Colors.white)),
+                child: Text(
+                  "Start",
+                  style: TextStyle(color: AppColors.textOnPrimary),
+                ),
               ),
             ],
           ),

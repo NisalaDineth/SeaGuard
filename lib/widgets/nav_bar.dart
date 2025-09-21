@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/app_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NavbBar extends StatelessWidget {
@@ -15,14 +16,14 @@ class NavbBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: Colors.white,
+        color: AppColors.lightSurface,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: AppColors.divider,
             blurRadius: 10,
             offset: Offset(0, -2),
           ),
@@ -37,11 +38,9 @@ class NavbBar extends StatelessWidget {
           type: BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
           onTap: onTabChange,
-          backgroundColor: Colors.white,
-          selectedItemColor: const Color(
-            0xFF2E7D8E,
-          ), // Ocean blue color for SeaGuard theme
-          unselectedItemColor: Colors.grey[600],
+          backgroundColor: AppColors.lightSurface,
+          selectedItemColor: AppColors.primary,
+          unselectedItemColor: AppColors.textHint,
           selectedLabelStyle: const TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: 16,
@@ -97,7 +96,7 @@ class NavbBar extends StatelessWidget {
         width: 24,
         height: 24,
         colorFilter: ColorFilter.mode(
-          isSelected ? const Color(0xFF2E7D8E) : Colors.grey[600]!,
+          isSelected ? AppColors.primary : AppColors.textHint,
           BlendMode.srcIn,
         ),
       ),

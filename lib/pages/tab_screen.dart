@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seaguard/pages/home_screen_fixed.dart';
+import 'package:seaguard/pages/learn_screen_new.dart';
 import '../controllers/tab_navigation_controller.dart';
 import '../widgets/nav_bar.dart';
-import 'home_screen.dart';
-import 'learn_screen.dart';
 import 'actions_screen.dart';
 import 'profile_screen.dart';
 
@@ -15,8 +15,8 @@ class TabScreen extends StatelessWidget {
     final TabNavigationController tabController = Get.put(TabNavigationController());
 
     final List<Widget> pages = [
-      const HomeScreen(),
-      const LearnScreen(),
+      const HomeScreenFixed(),
+      const LearnScreenNew(),
       const ActionsScreen(),
       const ProfileScreen(),
     ];
