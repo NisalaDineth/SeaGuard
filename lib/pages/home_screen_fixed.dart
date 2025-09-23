@@ -18,63 +18,87 @@ class HomeScreenFixed extends StatelessWidget {
       {"title": "Beaches Cleaned", "value": "5", "icon": Icons.beach_access},
     ];
 
-    return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 120,
-            floating: false,
-            pinned: true,
-            elevation: 0,
-            backgroundColor: AppColors.primary,
-            foregroundColor: AppColors.textOnPrimary,
-            flexibleSpace: FlexibleSpaceBar(
-              title: const Text(
-                "SeaGuard",
-                style: TextStyle(
-                  color: AppColors.textOnPrimary,
-                  fontWeight: FontWeight.w600,
+    return WillPopScope(
+      onWillPop: () async {
+        final shouldExit = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Are you sure you want to exit?'),
+            content: const Text('Do you want to close the app?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('No'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Yes'),
+              ),
+            ],
+          ),
+        );
+        return shouldExit == true;
+      },
+      child: Scaffold(
+        backgroundColor: theme.scaffoldBackgroundColor,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 120,
+              floating: false,
+              pinned: true,
+              elevation: 0,
+              backgroundColor: AppColors.primary,
+              foregroundColor: AppColors.textOnPrimary,
+              flexibleSpace: FlexibleSpaceBar(
+                title: const Text(
+                  "SeaGuard",
+                  style: TextStyle(
+                    color: AppColors.textOnPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                background: Container(
+                  decoration: BoxDecoration(
+                    gradient: AppColors.primaryGradient,
+                  ),
                 ),
               ),
-              background: Container(
-                decoration: BoxDecoration(gradient: AppColors.primaryGradient),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: AppDesignSystem.pagePadding,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Welcome section
+                    _buildWelcomeSection(context),
+
+                    AppDesignSystem.sectionSpacing,
+
+                    // KPI Cards
+                    _buildKPISection(context, kpis),
+
+                    AppDesignSystem.sectionSpacing,
+
+                    // Daily Challenge
+                    _buildDailyChallengeCard(context),
+
+                    AppDesignSystem.sectionSpacing,
+
+                    // Quick Actions
+                    _buildQuickActionsSection(context),
+
+                    AppDesignSystem.sectionSpacing,
+
+                    // Awareness Section
+                    _buildAwarenessSection(context),
+                  ],
+                ),
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: AppDesignSystem.pagePadding,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Welcome section
-                  _buildWelcomeSection(context),
-
-                  AppDesignSystem.sectionSpacing,
-
-                  // KPI Cards
-                  _buildKPISection(context, kpis),
-
-                  AppDesignSystem.sectionSpacing,
-
-                  // Daily Challenge
-                  _buildDailyChallengeCard(context),
-
-                  AppDesignSystem.sectionSpacing,
-
-                  // Quick Actions
-                  _buildQuickActionsSection(context),
-
-                  AppDesignSystem.sectionSpacing,
-
-                  // Awareness Section
-                  _buildAwarenessSection(context),
-                ],
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -124,6 +148,7 @@ class HomeScreenFixed extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.symmetric(
               horizontal: 8,
+              vertical: 8,
             ), // Add horizontal padding for shadows
             itemCount: kpis.length,
             separatorBuilder: (_, __) =>
@@ -219,35 +244,47 @@ class HomeScreenFixed extends StatelessWidget {
       {"title": "Share Impact", "icon": Icons.share},
     ];
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Quick Actions",
-          style: AppDesignSystem.sectionHeaderStyle(context),
-        ),
-        AppDesignSystem.itemSpacing,
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: AppDesignSystem.paddingMD,
-            mainAxisSpacing: AppDesignSystem.paddingMD,
-            childAspectRatio: 1.5,
-          ),
-          itemCount: quickActions.length,
-          itemBuilder: (context, index) {
-            final action = quickActions[index];
-            return _buildQuickActionCard(
-              context,
-              action["title"] as String,
-              action["icon"] as IconData,
-              index,
-            );
-          },
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Calculate a responsive aspect ratio based on available width
+        final crossAxisCount = 2;
+        final spacing = AppDesignSystem.paddingMD * (crossAxisCount - 1);
+        final cardWidth = (constraints.maxWidth - spacing) / crossAxisCount;
+        // Assume a minimum card height for content, e.g., 120
+        final minCardHeight = 120.0;
+        final aspectRatio = cardWidth / minCardHeight;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Quick Actions",
+              style: AppDesignSystem.sectionHeaderStyle(context),
+            ),
+            AppDesignSystem.itemSpacing,
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: AppDesignSystem.paddingMD,
+                mainAxisSpacing: AppDesignSystem.paddingMD,
+                childAspectRatio: aspectRatio,
+              ),
+              itemCount: quickActions.length,
+              itemBuilder: (context, index) {
+                final action = quickActions[index];
+                return _buildQuickActionCard(
+                  context,
+                  action["title"] as String,
+                  action["icon"] as IconData,
+                  index,
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -267,7 +304,7 @@ class HomeScreenFixed extends StatelessWidget {
           children: [
             Container(
               width: 48,
-              height: 48,
+              height: 40,
               decoration: AppDesignSystem.iconContainerDecoration(
                 AppColors.primary,
               ),
