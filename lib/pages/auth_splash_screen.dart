@@ -16,6 +16,8 @@ class _AuthSplashScreenState extends State<AuthSplashScreen>
   late AnimationController _fadeAnimationController;
   late Animation<double> _logoAnimation;
   late Animation<double> _fadeAnimation;
+  
+  get gradient => null;
 
   @override
   void initState() {
@@ -83,14 +85,11 @@ class _AuthSplashScreenState extends State<AuthSplashScreen>
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              AppColors.primary,
-              AppColors.primaryDark,
-              if (isDarkMode)
-                const Color(0xFF0A0A0A)
-              else
-                const Color(0xFFF5F9FA),
-            ],
+        colors: [
+          AppColors.primary,
+          AppColors.primaryDark,
+          const Color(0xFF0D3A42),
+        ],
           ),
         ),
         child: Center(

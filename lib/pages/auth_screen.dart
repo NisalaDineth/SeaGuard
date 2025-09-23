@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:seaguard/utils/app_colors.dart';
 import '../controllers/auth_controller.dart';
 import 'tab_screen.dart';
 
@@ -21,12 +22,9 @@ class AuthScreen extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  const Color(0xFF2E7D8E),
-                  const Color(0xFF1E5A6B),
-                  if (isDarkMode)
-                    const Color(0xFF0A0A0A)
-                  else
-                    const Color(0xFFF5F9FA),
+                  AppColors.primary,
+                  AppColors.primaryDark,
+                  const Color(0xFF0D3A42),
                 ],
               ),
             ),
